@@ -2,94 +2,103 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.netbeans.contrib</groupId>
-        <artifactId>contrib-parent</artifactId>
-        <version>RELEASE90</version>
-        <relativePath>..</relativePath>
-    </parent>
-    <artifactId>org-netbeans-modules-tanui</artifactId>
-    <version>1.3</version>
+    <groupId>eu.herrn.netbeans</groupId>
+    <artifactId>netbeans-laf-tanui</artifactId>
+    <version>1.4-SNAPSHOT</version>
     <packaging>nbm</packaging>
+
     <name>Tan UI and Editor Theme</name>
     <description>A module for people who don't like black text on white backgrounds</description>
+  
     <licenses>
         <license>
             <name>Apache 2.0</name>
             <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
-    <developers>
-        <developer>
-            <name>Tim Boudreau</name>
-            <email>tim@timboudreau.com</email>
-            <url>https://timboudreau.com</url>
-        </developer>
-    </developers>
-    <scm>
-        <url>https://github.com/timboudreau/netbeans-contrib</url>
-        <connection>scm:git:https://github.com/timboudreau/netbeans-contrib.git</connection>
-        <developerConnection>git@github.com/timboudreau/netbeans-contrib.git</developerConnection>
-    </scm>
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netbeans.version>RELEASE110</netbeans.version>
         <module.display.category>Infrastructure</module.display.category>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-swing-plaf</artifactId>
+            <version>${netbeans.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-filesystems</artifactId>
+            <version>${netbeans.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-modules</artifactId>
+            <version>${netbeans.version}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util-ui</artifactId>
+            <version>${netbeans.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration/>
             </plugin>
+            <plugin> <!-- required since nbm-plugin 3.0-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                  <archive>
+                    <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                  </archive>
+                </configuration>
+              </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
-                <configuration>
-                    <codeNameBase>org.netbeans.modules.tanui</codeNameBase>
-                    <cluster>extra</cluster>
-                    <requiresRestart>true</requiresRestart>
-                    <author>Tim Boudreau</author>
-                    <moduleDependencies>
-                        <dependency>
-                            <id>org.netbeans.api:org-netbeans-swing-plaf</id>
-                            <explicitValue>org.netbeans.swing.plaf &gt; 1.9</explicitValue>
-                            <!--Generated 2018-07-21 against code-name-base: org.netbeans.swing.plaf specification-version: 1.41.1 implementation-version: 201609300101 has-public-packages-->
-                        </dependency>
-                        <dependency>
-                            <id>org.netbeans.api:org-openide-filesystems</id>
-                            <explicitValue>org.openide.filesystems &gt; 9.0</explicitValue>
-                            <!--Generated 2018-07-21 against code-name-base: org.openide.filesystems specification-version: 9.10.1 implementation-version: 201609300101 has-public-packages-->
-                        </dependency>
-                        <dependency>
-                            <id>org.netbeans.api:org-openide-modules</id>
-                            <explicitValue>org.openide.modules &gt; 7.10</explicitValue>
-                            <!--Generated 2018-07-21 against code-name-base: org.openide.modules specification-version: 7.48.1 implementation-version: 201609300101 has-public-packages-->
-                        </dependency>
-                        <dependency>
-                            <id>org.netbeans.api:org-openide-util-ui</id>
-                            <explicitValue>org.openide.util.ui &gt; 9.3</explicitValue>
-                            <!--Generated 2018-07-21 against code-name-base: org.openide.util.ui specification-version: 9.6.1 implementation-version: 201609300101 has-public-packages-->
-                        </dependency>
-                    </moduleDependencies>
-                </configuration>
+                <version>3.13</version>
+                <extensions>true</extensions>
+                <!--
+                  <configuration>
+                      <codeNameBase>org.netbeans.modules.tanui</codeNameBase>
+                      <cluster>extra</cluster>
+                      <requiresRestart>true</requiresRestart>
+                      <author>Tim Boudreau</author>
+                      <moduleDependencies>
+                          <dependency>
+                              <id>org.netbeans.api:org&#45;netbeans&#45;swing&#45;plaf</id>
+                              <explicitValue>org.netbeans.swing.plaf &#38;gt; 1.9</explicitValue>
+                              <!&#45;&#45;Generated 2018&#45;07&#45;21 against code&#45;name&#45;base: org.netbeans.swing.plaf specification&#45;version: 1.41.1 implementation&#45;version: 201609300101 has&#45;public&#45;packages&#45;&#45;>
+                          </dependency>
+                          <dependency>
+                              <id>org.netbeans.api:org&#45;openide&#45;filesystems</id>
+                              <explicitValue>org.openide.filesystems &#38;gt; 9.0</explicitValue>
+                              <!&#45;&#45;Generated 2018&#45;07&#45;21 against code&#45;name&#45;base: org.openide.filesystems specification&#45;version: 9.10.1 implementation&#45;version: 201609300101 has&#45;public&#45;packages&#45;&#45;>
+                          </dependency>
+                          <dependency>
+                              <id>org.netbeans.api:org&#45;openide&#45;modules</id>
+                              <explicitValue>org.openide.modules &#38;gt; 7.10</explicitValue>
+                              <!&#45;&#45;Generated 2018&#45;07&#45;21 against code&#45;name&#45;base: org.openide.modules specification&#45;version: 7.48.1 implementation&#45;version: 201609300101 has&#45;public&#45;packages&#45;&#45;>
+                          </dependency>
+                          <dependency>
+                              <id>org.netbeans.api:org&#45;openide&#45;util&#45;ui</id>
+                              <explicitValue>org.openide.util.ui &#38;gt; 9.3</explicitValue>
+                              <!&#45;&#45;Generated 2018&#45;07&#45;21 against code&#45;name&#45;base: org.openide.util.ui specification&#45;version: 9.6.1 implementation&#45;version: 201609300101 has&#45;public&#45;packages&#45;&#45;>
+                          </dependency>
+                      </moduleDependencies>
+                  </configuration>
+                -->
             </plugin>
         </plugins>
     </build>
